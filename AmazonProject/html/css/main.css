@@ -1,0 +1,176 @@
+
+body {
+    background: url("../img/yellowgradient.png") scroll center top #f4eaca;
+    background-repeat: repeat-x; 
+    font: 12px/150% Verdana,Tahoma,sans-serif;
+}
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    border: 0 none;
+    font: inherit;
+    padding: 0;
+}
+
+h1 {
+    color: #666666;
+    font: bold 26px/200% "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+h5, h6, blockquote, p, form, fieldset, table {
+    margin: 0 0 1em;
+}
+a, a:link, a:visited, a:active {
+    color: #478FB3;
+    text-decoration: none;
+}
+* a {
+    position: relative;
+}
+.emphasis {
+    font-style: italic;
+}
+.clear {
+    clear: both;
+}
+
+
+
+
+/* ----------------- LAYOUT ---------------*/
+.wrap {
+    font-size: 12px;
+    margin: 0 auto;
+    width: 940px;
+}
+
+/*------------- HEADER -------------*/
+.header_small {
+    height: 76px;
+    margin: 0 auto;
+    padding-top: 13px;
+    width: 800px;
+}
+#header #logo {
+    float: left;
+}
+#header > #logo > a {
+    background: url("../img/logo.png") no-repeat scroll left top transparent;
+    display: block;
+    height: 120px;
+    text-indent: -9999px;
+    width: 205px;
+}
+#header .login {
+    float: right;
+    line-height: 70px;
+    padding-right: 20px;
+    text-align: right;
+}
+#header > .login > a {
+    margin-left: 20px;
+}
+.buttonSignIn {
+    border: 1px solid #70BCE0;
+    float: left;
+    margin-top: 15px;
+}
+
+/* ---------------- CENTER CONTENT -----------------*/
+.box_center {
+    background: none repeat scroll 0 0 #FFFFFF;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+    margin: 0 auto 20px;
+    padding: 30px 20px;
+    width: 800px;
+}
+#main_tagline {
+    color: #146eb4;
+    font-size: 36px;
+    text-align: center;
+}
+
+/* --- CENTER SEARCH --- */
+.formbox {
+    float: left;
+    margin-right: 10px;
+}
+#landing_signup {
+    background-color: #FDFEE1;
+    border: 1px solid #EBE54D;
+    margin: 35px auto 0;
+    padding: 20px;
+    width: 635px;
+}
+
+.forminput {
+    -moz-font-feature-settings: inherit;
+    -moz-font-language-override: inherit;
+    background: none repeat scroll 0 0 #FFFFF3;
+    border: 1px solid #CCCCCC;
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.33) inset;
+    color: #666666;
+    font-family: inherit;
+    font-size: inherit;
+    font-size-adjust: inherit;
+    font-stretch: inherit;
+    font-style: inherit;
+    font-variant: inherit;
+    font-weight: inherit;
+    height: 32px;
+    line-height: 32px;
+    outline: medium none;
+    padding: 0 6px;
+}
+#landing_signup .formbutton {
+    font-size: 16px;
+}
+.formbutton:active {
+    background: url("../img/bg-button.png") repeat-x scroll left bottom transparent;
+}
+.formbutton {
+    background: url("../img/bg-button.png") repeat-x scroll left top transparent;
+    border: 1px solid #8EB000;
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 0 1px 0 #FFFFFF;
+    color: #FFFFFF !important;
+    cursor: pointer;
+    display: block;
+    font: bold 14px/32px "Helvetica Neue",Helvetica,Arial,sans-serif;
+    height: 34px;
+    padding: 0 12px;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+#landing_signup #amazon-url {
+    background-color: #FFFFFF;
+    font-size: 17px;
+    width: 433px;
+}
+
+#landing_signup small {
+    background: url("../img/lock_green.png") no-repeat scroll left top transparent;
+    color: #555555;
+    font-size: 14px;
+    line-height: 16px;
+    margin-left: 4px;
+    padding-left: 18px;
+}
+#landing_signup .promise {
+    float: left;
+}
+
+#bodysignup .forminput {
+    width: 260px;
+}
+#landing_signup .clear {
+    margin-bottom: 0;
+}
+
+
+
+.mockRecentlyPurchased{
+    text-align: center;
+    width: 100%;
+}
+ 
