@@ -1,0 +1,11 @@
+<title><?php echo $this->escape($this->pageTitle); ?> - Central Ohio Hockey</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<meta name="Keywords" content="<?php echo $this->keywords; ?>" />
+<meta name="Description" content="<?php echo $this->description; ?>" />
+<?php $this->headLink()->appendStylesheet('/css/reset.css'); ?> 
+<?php $this->headLink()->appendStylesheet('/css/'.$this->style.'.css'); //Likely main.css ?>
+<!--[if IE]>
+	<?php $this->headLink()->appendStylesheet('/css/fixIE.css'); ?>
+<![endif]-->
+<?php echo $this->headLink(); ?>
+<script type="text/javascript" src="/js/jquery-1.3.2.min.js"></script>

@@ -1,0 +1,26 @@
+<tr class='<?= $this->even ? ' even' : '' ?>
+	<?= $this->this["gameType"] > 1 ? ' playoffs' : '' ?>'
+>
+	<td><?=$this->this["GameDate"]?></td>
+	<td><?=$this->this["GameTime"]?></td>
+	<td><?=$this->this["location"]?> <?=$this->this["locationSection"]?></td>
+	<td><a href="/team/<?= $this->this["HomeAlias"] ?>/<?= $this->this["sessionAlias"] ?>"><?= $this->this["HomeTeam"] ?></a></td>
+	<td><a href="/team/<?= $this->this["AwayAlias"] ?>/<?= $this->this["sessionAlias"] ?>"><?= $this->this["AwayTeam"] ?></a></td>
+	<td class ="<?php
+		if (stristr($this->this["Outcome"],"W")) { echo "win"; }
+		elseif (stristr($this->this["Outcome"],"OTL")) { echo "tie"; }
+		elseif (stristr($this->this["Outcome"],"L")) { echo "loss"; }
+		else { echo "tie"; }
+		?>">
+<?php if($this->this["gameType"] == 4){ echo "<div class='championship'>".$this->this["Outcome"]."</div>"; }else{
+	echo $this->this["Outcome"];
+			} ?>
+		</td>
+	<td>
+	<?php 
+		if($this->this["hasDetails"] == 1){ 
+			echo "<a href='/game/".$this->this["gameID"]."'>view</a>"; 
+		}
+	?>
+	</td>
+</tr>

@@ -1,6 +1,6 @@
 
 body {
-    background: url("../img/yellowgradient.png") scroll center top #f4eaca;
+    background: url("../img/blueGradient.png") scroll center top #3386a7;
     background-repeat: repeat-x; 
     font: 12px/150% Verdana,Tahoma,sans-serif;
 }
@@ -9,6 +9,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
     border: 0 none;
     font: inherit;
     padding: 0;
+    margin: 0;
 }
 
 h1 {
@@ -72,6 +73,9 @@ a, a:link, a:visited, a:active {
     border: 1px solid #70BCE0;
     float: left;
     margin-top: 15px;
+}
+#main{
+    min-height: 568px;
 }
 
 /* ---------------- CENTER CONTENT -----------------*/
@@ -149,12 +153,12 @@ a, a:link, a:visited, a:active {
 }
 
 #landing_signup small {
-    background: url("../img/lock_green.png") no-repeat scroll left top transparent;
-    color: #555555;
+    background: url("../img/attention.png") no-repeat scroll left 3px transparent; 
+    color: #8c8c8c;
     font-size: 14px;
     line-height: 16px;
     margin-left: 4px;
-    padding-left: 18px;
+    padding-left: 14px;
 }
 #landing_signup .promise {
     float: left;
@@ -168,7 +172,16 @@ a, a:link, a:visited, a:active {
 }
 
 
+/*--------------- FOOTER ----------------- */
+#footer {
+    background: url("../img/bg-footer.jpg") repeat-x scroll center top #164f73;
+    color: #164f73;
+    line-height: 20px;
+    margin-top: 20px;
+    min-height: 157px;
+}
 
+/* -0-------------- DELETE ------------------------ */
 .mockRecentlyPurchased{
     text-align: center;
     width: 100%;

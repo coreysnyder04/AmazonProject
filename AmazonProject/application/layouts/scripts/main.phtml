@@ -1,0 +1,26 @@
+<?php echo $this->doctype(); ?>
+<html lang="en-US" xml:lang="en-US" xmlns="http://www.w3.org/1999/xhtml">
+<head>  
+	
+<?php echo $this->layout()->head; ?>
+
+</head> 
+<body>
+<div id="header" class="header_small">
+	<?php echo $this->layout()->header; ?>
+</div>
+	
+
+
+	<div id="main">
+	
+		<?php echo $this->layout()->content ?>
+	
+	</div>
+
+<?php echo $this->layout()->footer; ?>
+
+<?php echo $this->layout()->analytics; ?>
+
+</body>
+</html>

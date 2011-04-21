@@ -1,0 +1,40 @@
+﻿<script type="text/javascript">
+$(function() {
+		
+		$( "#dialog-captainRequest" ).dialog({
+			modal: true,
+			autoOpen: false,
+			width: 600,
+			height: 320,
+			hide: "explode",
+			buttons: {
+				Submit: function() {
+					$.post("/ajax/makeTeamCaptainRequest.php", { userID: "<?=$this->userID?>", teamID: "<?=$this->teamID?>", userIP: "<?=$this->userIP?>", teamName: "<?=$this->escape($this->teamName)?>", email: "<?=$this->email?>", leagueName: "<?=$this->escape($this->leagueName)?>" },
+					   function(data){ 
+$('#dialog-captainRequest').dialog('close');
+alert(data);
+					});
+					
+				}
+
+			},
+			Close: function() {
+				$( this ).dialog( "close" );
+			}
+		});
+		
+		$('#linkUpButton').click(function(){
+			$('#dialog-captainRequest').dialog('open');
+			return false;
+		}); 
+	});
+</script>
+	
+	
+<div style="display: none;" id="dialog-captainRequest" title="Are you the captain?">
+		<p>As the captain, you are able to edit the team roster, add player stats, as well as other team customization options. </p>
+		<p>By clicking submit below, your telling us that <b>you</b> are the captain of <b><?=$this->escape($this->teamName)?></b> in <b><?=$this->escape($this->leagueName)?></b>. Once submitted, you'll receive an email with the instructions on how to provide us with some additional info so that we can verify that you are in fact the captain.</p>
+		
+		<p><span style="float: left; margin-right: 0.3em;" class="ui-icon ui-icon-alert"></span> 
+		<strong>Alert:</strong> Random requests will get your Account/IP banned! </p>
+</div>

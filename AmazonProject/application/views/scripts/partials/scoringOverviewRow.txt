@@ -1,0 +1,8 @@
+<tr>
+	<td><a href="/team/<?= $this->this["teamAlias"] ?>"><?= $this->this["teamName"] ?></a></td>
+	<td><?=$this->this["Period1Goals"]?></td>
+	<td><?=$this->this["Period2Goals"]?></td>
+	<td><?=$this->this["Period3Goals"]?></td>
+	<td><?=$this->this["PeriodOTGoals"]?></td>
+	<td><?=$this->this["TotalGoals"]?></td>
+</tr>

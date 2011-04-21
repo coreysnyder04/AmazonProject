@@ -1,0 +1,23 @@
+<tr<?= $this->even ? ' class="even"' : '' ?>>
+	<td><a href="/team/<?= $this->this["alias"] ?>/<?= $this->this["SessionAlias"] ?>"><?= $this->this["SessionAliasCaps"] ?></a></td>
+	<td><?= $this->this["LeagueName"] ?></td>
+	<td><a href="/team/<?= $this->this["alias"] ?>/<?= $this->this["SessionAlias"] ?>"><?= $this->this["teamName"] ?></a></td>
+	<td><?= $this->this["W"] ?></td>
+	<td><?= $this->this["L"] ?></td>
+	<td><?= $this->this["T"] ?></td> <!--OTL -->
+	<td><?= $this->this["OTL"] ?></td> <!--OTL -->
+	<td><?= $this->this["Pts"] ?></td>
+	<td><?= $this->this["GF"] ?></td>
+	<td><?= $this->this["GA"] ?></td>
+	
+	<!-- 
+	<td><a href="/team/<?= $this->this["TeamAlias"] ?>"><?= $this->this["TeamName"] ?></a></td>
+	<td><?= $this->this["GP"] ?></td>
+	<td><?= $this->this["W"] ?></td>
+	<td><?= $this->this["L"] ?></td>
+	<td><?= $this->this["T"] ?></td>
+	<td><?= $this->this["Pts"] ?></td>
+	<td><?= $this->this["GF"] ?></td>
+	<td><?= $this->this["GA"] ?></td>
+	-->
+</tr>

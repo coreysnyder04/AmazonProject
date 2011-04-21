@@ -2,17 +2,9 @@
 <link href="/css/main.css" media="screen" rel="stylesheet" type="text/css" />
 <div class="wrap">
 
-	<div id="header" class="header_small">
-		<div id="logo"><a href="/">IdleBuy</a></div>
-		
-		<div class="login">
-            <a class="formbutton buttonSignIn fancyboxForm" href="/ajax/ajax_sign_up/">Sign Up</a>
-            <a id="login_box_launch" href="/ajax/login_box/">Login</a>
-        </div>
-	</div>
 	
 	<div class="box_center">
-		<h1 id="main_tagline">Pick <span class="emphasis">it.</span> Price <span class="emphasis">it. </span>Buy <span class="emphasis">it.</span>  </h1>
+		<span id="main_tagline">Pick <span class="emphasis">it.</span> Price <span class="emphasis">it. </span>Buy <span class="emphasis">it.</span>  </span>
 		<!-- <h1 id="main_tagline">Pick <span class="emphasis">your</span> item. Choose <span class="emphasis">your</span> price. And we’ll tell <span class="emphasis">you</span> when it’s time to buy!  </h1> -->
 		
 		<div class="landing_signup_city" id="landing_signup">
@@ -21,10 +13,10 @@
                 
                 
                 <div class="formbox">
-                    <input type="text" id="amazon-url" class="forminput" value="Amazon Product Link" title="amazon-url" name="amazon-url">
+                    <input type="text" id="amazon-url" class="forminput autoClearInput" value="Amazon Product URL" title="amazon-url" name="amazon-url">
                 </div> 
                 <div class="formbox formbox_right"> 
-                <input type="submit" value="Let's Get Started!" class="formbutton">
+                <input id="pickItemBtn" type="button" value="Let's Get Started!" class="formbutton">
                 </div> 
                 <p class="clear"></p>
                 <div class="promise"><small>Enter the URL to your product on amazon.</small></div> 
@@ -37,3 +29,44 @@
                 </div>
 	</div>
 </div>
+
+<script type="text/javascript">
+
+$(function() {
+	//Logic to clear text field 
+	$(".autoClearInput").bind("blur focus",function(e){
+		console.log("HEY");	
+        var field = e.target;
+        if (field.defaultValue === field.value){
+            field.value = '';
+            $(field).removeClass("fm-empty");
+        }
+        else if (field.value === ''){
+            field.value = field.defaultValue;
+            $(field).addClass("fm-empty");
+        }
+    });
+    
+    $("#pickItemBtn").click(function(event){
+		var link = $("#amazon-url").val();
+		console.log("Clicked");
+		console.log($(link).val());
+		if(link.length < 1 || link === "Amazon Product URL"){
+			alert("You have to enter an Amazon URL");
+		}else{
+			//Pull out ID from amazon URL
+			var pattern =  /(\/dp\/)(.*)(\/)/g;
+			var amazonID = link.match(pattern)[0].split("/")[2];	
+			if(amazonID.length > 0){
+				window.location = "/addItem/"+amazonID;
+			}
+		}
+    });
+    
+    
+    
+    
+});
+
+
+</script>
