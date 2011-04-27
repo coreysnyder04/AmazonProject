@@ -2,7 +2,6 @@
 
 class IndexController extends Zend_Controller_Action
 {
-
 	protected $amazonService;
 
 	public function init()
@@ -31,54 +30,18 @@ class IndexController extends Zend_Controller_Action
 	public function additemAction()
 	{
 		$this->view->pageTitle = "AddItem";
-		$itemID = $this->getRequest()->getParam("itemID");
-		$itemData = "";
-		
 		//Hickman do your thing w/ this item ID to pull back the data from amazon
-		$filecontent = $this->amazonService->getAmazonData($itemID);
+		$itemID = $this->getRequest()->getParam("itemID");
 		
-		if($filecontent)
-		{ 
-			$xml = simplexml_load_string($filecontent);
-			$xml->registerXPathNamespace("ns", "http://webservices.amazon.com/AWSECommerceService/2005-10-05");
-				
-			//get title
-			$titleQuery = $xml->xpath("//ns:Title");
-			$title = $titleQuery[0];
-				
-			//get prices
-			$priceQuery = $xml->xpath("//ns:FormattedPrice");
-			$listPrice = $priceQuery[0];
-			$lowestNewPrice = $priceQuery[1];
-			$lowestUsedPrice = $priceQuery[2];
-				
-			$this->view->listPrice = $listPrice;
-			
-			//get image URL
-			$imageQuery = "";
-			$imageURL = "";
-			
-			//Put the data in this array var
-			$itemData = array (
-				"title" => $title,
-				"listPrice" => $listPrice,
-				"lowestNewPrice" => $lowestNewPrice,
-				"lowestUsedPrice" => $lowestUsedPrice);
-			
-			//For testing purposes only -- Delete for Production
-			echo $itemData["title"]."<br />";
-			echo $itemData["listPrice"]."<br />";
-			echo $itemData["lowestNewPrice"]."<br />";
-			echo $itemData["lowestUsedPrice"]."<br />";
-		}
-		else 
+		$itemData = $this->amazonService->getAmazonData($itemID);
+
+		//this is for testing - will remove for production
+		foreach($itemData as $d)
 		{
-			echo "There as an error contacting AWS.";
-		}
+			echo "$d <br />";
+		}		
 			
 		//Here's where I push the data to the view
 		$this->view->itemData = $itemData;	
 	}
-	
-	
 }

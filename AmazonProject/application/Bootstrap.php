@@ -38,6 +38,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 	{
 		$frontController = Zend_Controller_Front::getInstance();
 		$router = $frontController->getRouter();
+		$restRoute = new Zend_Rest_Route($frontController);
+		$router->addRoute('api', $restRoute);
 		$router->addRoute(
 			'someExample',
 			new Zend_Controller_Router_Route(

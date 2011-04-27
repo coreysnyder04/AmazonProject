@@ -33,47 +33,25 @@ class Default_Model_AmazonService
 	
 	public function getAmazonData($itemID)
 	{
-		$url =
-			"http://ecs.amazonaws.com/onca/xml?"
-			."Service=AWSECommerceService"
-			."&AWSAccessKeyId=AKIAJVBMLHZM5WWDE52A"
-			."&AssociateTag=8842-6428-7537"
-			."&Operation=ItemLookup"
-			."&ItemId=".$itemID
-			."&ResponseGroup=ItemAttributes,OfferSummary,Medium";
-			
-			//the $secret key is not to be shared with ANYONE
-			$secret = '2pz5jsxWFfkFbWQLkveKmrmnDwZSbvdWZNzfEzcQ';
-			
-			//pulls out 'ecs.amazonaws.com'
-			$host = parse_url($url,PHP_URL_HOST);
-			
-			//puts the timestamp at the end of the URL
-			$timestamp = gmstrftime("%Y-%m-%dT%H:%M:%S.000Z");
-			$url=$url. "&Timestamp=" . $timestamp;
-			
-			//replace all the commas and colons in the URL after the questionmark
-			$paramstart = strpos($url,"?");
-			$strParse = substr($url,$paramstart+1);
-			$strParse = str_replace(",","%2C",$strParse);
-			$strParse = str_replace(":","%3A",$strParse);
-			
-			//split, sort, and put back together the string to be signed
-			$params = explode("&",$strParse);
-			sort($params);
-			$strSign = "GET\n" . $host . "\n/onca/xml\n" . implode("&",$params);
-			
-			//sign the string
-			$strSign = base64_encode(hash_hmac('sha256', $strSign, $secret, true));
-			$strSign = urlencode($strSign);
-			$signedurl = $url . "&Signature=" . $strSign;
-			
-			//grab contents from URL
-			$filecontent = "";
-			$filecontent = @file_get_contents($signedurl);
-			
-			//we'll assign the variables here once they're selected from xpath
-			return $filecontent;
+		$client = new Zend_Service_Amazon('AKIAJVBMLHZM5WWDE52A','US','2pz5jsxWFfkFbWQLkveKmrmnDwZSbvdWZNzfEzcQ');
+		$item = $client->itemLookup($itemID,array(
+		'ResponseGroup' => 'Medium,Offers'
+		));
+		
+		$itemData = "";
+		$itemData = array(
+			'Title' => $item->Title,
+			'CurrentPrice' => $item->FormattedPrice,
+			'LowestUsedPrice' => $item->Offers->LowestUsedPrice,
+			'StockNew' => $item->Offers->TotalNew,
+			'StockUsed' => $item->Offers->TotalUsed,
+			'SmallImageUrl' => $item->SmallImage->Url,
+			'MediumImageUrl' => $item->MediumImage->Url,
+			'LargeImageUrl' => $item->LargeImage->Url,
+			'AmazonUrl' => $item->DetailPageURL
+		);
+		
+		return $itemData;
 	}
 	
 	public function getLeagueNameByAlias($alias)
