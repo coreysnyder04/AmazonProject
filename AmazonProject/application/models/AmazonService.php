@@ -26,13 +26,45 @@ class Default_Model_AmazonService
 		$item = $client->itemLookup($itemID,array(
 		'ResponseGroup' => 'Medium,Offers'
 		));
-						
+		
+		//format variables for consistency
+		if($item->FormattedPrice)
+		{
+			$ListPriceNoDollarSign = $item->FormattedPrice;	
+			$ListPriceNoDollarSign = preg_replace('/[\$,]/', '', $item->FormattedPrice);
+		}
+		else 
+		{
+			$ListPriceNoDollarSign = "";
+		}
+		
+		if($item->Offers->LowestNewPrice)
+		{
+			$lnp = $item->Offers->LowestNewPrice;
+			$lnp = $lnp/100;
+		}
+		else
+		{
+			$lnp = "";
+		}
+		
+		if($item->Offers->LowestUsedPrice)
+		{
+			$lup = $item->Offers->LowestUsedPrice;
+			$lup = $lup/100;
+		}
+		else
+		{
+			$lup = "";
+		}
+		
+		//build array response
 		$itemData = "";
 		$itemData = array(
 			'Title' => $item->Title,
-			'ListPrice' => $item->FormattedPrice,
-			'LowestNewPrice' => $item->Offers->LowestNewPrice,
-			'LowestUsedPrice' => $item->Offers->LowestUsedPrice,
+			'ListPrice' => $ListPriceNoDollarSign,
+			'LowestNewPrice' => $lnp,
+			'LowestUsedPrice' => $lup,
 			'StockNew' => $item->Offers->TotalNew,
 			'StockUsed' => $item->Offers->TotalUsed,
 			'SmallImageUrl' => $item->SmallImage->Url,
@@ -45,9 +77,9 @@ class Default_Model_AmazonService
 		
 		//get and format variables for database input
 		$currentDate = date("Y-m-d");		
-		$ListPriceNoDollarSign = preg_replace('/[\$,]/', '', $itemData[ListPrice]);
 		
-		$writeToDb = true;
+		
+		$writeToDb = false;
 		if($writeToDb == true)
 		{
 			$data = array(
@@ -58,8 +90,8 @@ class Default_Model_AmazonService
 				 	'manufacturer' => $itemData[Manufacturer],
 				  	'lowest_new_price' => $itemData[LowestNewPrice],
 				   	'lowest_used_price' => $itemData[LowestUsedPrice],
-				    'list_price' => $ListPriceNoDollarSign,
-				    'amazon_url' => "$itemData[AmazonUrl]"
+				    'list_price' => $itemData[ListPrice],
+				    'amazon_url' => $itemData[AmazonUrl]
 			);
 			
 			$this->itemTable->insert($data);
