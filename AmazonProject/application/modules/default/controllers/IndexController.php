@@ -24,7 +24,7 @@ class IndexController extends Zend_Controller_Action
     }
 	public function aboutusAction()
 	{
-		$this->view->pageTitle = "About Us";
+		$this->view->pageTitle = "About Us!";
 	}
 	public function additemAction()
 	{
