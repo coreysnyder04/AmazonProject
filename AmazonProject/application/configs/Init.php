@@ -4,7 +4,6 @@
 
 $this->controllerName = $this->getRequest()->getControllerName();
 $this->actionName = $this->getRequest()->getActionName();
-$this->teamAlias = $this->getRequest()->getParam("team");
 
 /* Model */
 
@@ -23,4 +22,3 @@ $this->_helper->layout->setLayout($this->view->style);
 
 $this->view->controllerName = $this->controllerName;
 $this->view->actionName = $this->actionName;
-$this->view->teamAlias = $this->teamAlias;
