@@ -49,14 +49,12 @@ $(function() {
     
     $("#pickItemBtn").click(function(event){
 		var link = $("#amazon-url").val();
-		console.log("Clicked");
-		console.log($(link).val());
 		if(link.length < 1 || link === "Amazon Product URL"){
 			alert("You have to enter an Amazon URL");
 		}else{
 			//Pull out ID from amazon URL
-			var pattern =  /(\/dp\/)(.*)(\/)/g;
-			var amazonID = link.match(pattern)[0].split("/")[2];	
+			var pattern = /(\/)[A-Z0-9]{10}(\/)/g;
+			var amazonID = link.match(pattern)[0].split("/")[1];		
 			if(amazonID.length > 0){
 				window.location = "/addItem/"+amazonID;
 			}

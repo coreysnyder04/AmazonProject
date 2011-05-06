@@ -9,7 +9,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             'namespace' => 'Default',
             'basePath'  => dirname(__FILE__),
         ));
-		Zend_Session::start(); 
+        Zend_Session::start(); 
         return $autoloader;
     }
 
@@ -36,29 +36,27 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
 	protected function _initRoutes()
 	{
+		//get instance of front controller
 		$frontController = Zend_Controller_Front::getInstance();
 		$router = $frontController->getRouter();
-		$restRoute = new Zend_Rest_Route($frontController);
-		$router->addRoute('api', $restRoute);
-		$router->addRoute(
-			'someExample',
-			new Zend_Controller_Router_Route(
-				':dunno/phil/:userid/fac', 
-				array('controller' => 'index', 'action' => 'index')
-			)
-		);
+		
+		//initialize rest route
+		$restRoute = new Zend_Rest_Route($frontController, array(), array('api'));
+		$router->addRoute('rest', $restRoute);
+		
+		//routes
 		$router->addRoute(
 			'home',
 			new Zend_Controller_Router_Route(
 				'/home', 
-				array('controller' => 'index', 'action' => 'index')
+				array('module' => 'default', 'controller' => 'index', 'action' => 'index')
 			)
 		);
 		$router->addRoute(
 				'aboutus',
 				new Zend_Controller_Router_Route(
 					'/aboutus', 
-					array('controller' => 'index', 'action' => 'aboutus')
+					array('module' => 'default', 'controller' => 'index', 'action' => 'aboutus')
 					)
 				);
 				
@@ -66,7 +64,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 				'addItemEmpty',
 				new Zend_Controller_Router_Route(
 					'/addItem', 
-					array('controller' => 'index', 'action' => 'index')
+					array('module' => 'default', 'controller' => 'index', 'action' => 'index')
 					)
 				);
 				
@@ -74,11 +72,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 				'addItem',
 				new Zend_Controller_Router_Route(
 					'/addItem/:itemID', 
-					array('controller' => 'index', 'action' => 'additem')
+					array('module' => 'default', 'controller' => 'index', 'action' => 'additem')
 					)
 				);
 	}
-	
 }
-
 ?>

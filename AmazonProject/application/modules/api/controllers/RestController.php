@@ -1,5 +1,5 @@
 <?php
-class ApiController extends Zend_Rest_Controller
+class Api_RestController extends Zend_Rest_Controller
 {
 
 	protected $amazonService;
@@ -15,19 +15,7 @@ class ApiController extends Zend_Rest_Controller
 		// handle GET requests
 		$itemData = "";
 		$itemID = $this->_getParam('id');
-		$item = $this->amazonService->getAmazonData($itemID);
-		
-		$itemData = array(
-			'Title' => $item->Title,
-			'CurrentPrice' => $item->FormattedPrice,
-			'LowestUsedPrice' => $item->Offers->LowestUsedPrice,
-			'StockNew' => $item->Offers->TotalNew,
-			'StockUsed' => $item->Offers->TotalUsed,
-			'SmallImageUrl' => $item->SmallImage->Url,
-			'MediumImageUrl' => $item->MediumImage->Url,
-			'LargeImageUrl' => $item->LargeImage->Url,
-			'AmazonUrl' => $item->DetailPageURL
-		);
+		$itemData = $this->amazonService->getAmazonData($itemID);
 
 		$this -> _helper->json($itemData);
 	}

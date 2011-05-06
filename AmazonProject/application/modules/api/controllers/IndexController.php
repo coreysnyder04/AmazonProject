@@ -21,7 +21,6 @@ class IndexController extends Zend_Controller_Action
 
     public function indexAction()
     {
-      
     }
 	public function aboutusAction()
 	{
@@ -33,7 +32,7 @@ class IndexController extends Zend_Controller_Action
 		//Hickman do your thing w/ this item ID to pull back the data from amazon
 		$itemID = $this->getRequest()->getParam("itemID");
 		
-		$itemData = @$this->amazonService->getAmazonData($itemID);
+		$itemData = $this->amazonService->getAmazonData($itemID);
 
 		//this is for testing - will remove for production
 		foreach($itemData as $d)
