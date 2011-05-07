@@ -1,7 +1,7 @@
 <div class="wrap">
 	<div class="box_center">
 		<!-- ITEM DESCRIPTION -->
-		<div class="item-Title"><?php echo $this->itemData["Title"]; ?></div>
+		<div class="item-Title"><?php echo $this->itemData["Title"]; ?></div>!!!
 		<div class="item-Manufac">Brand Name</div>
 		<div id="itemInfoContainer">
 			<div id="itemPhotoContainer">
@@ -27,11 +27,12 @@
 		<div id="createAlertContainer">
 			<h1>Create Alert</h1>
 			<div class="alertSettingsContainer">
-				<h2>Price: </h2>
+				<h2>Price: </h2><span id="sliderPrice"></span>
 				<label for="anyPriceChange">Any Price Decrease</label><input type="checkbox" id="anyPriceChange"/>
 				<div id="priceSlider" style="width:200px"></div>
 				<h2>Expires:</h2>
 				<p>Date: <input id="expires" type="text"></p>
+				<input id="addItem" type="button" value="Watch Item" />
 			</div>
 		</div>
 		
@@ -42,7 +43,39 @@
 
 <script>
 	$(function() {
-		$( "#priceSlider" ).slider();
+		
+		var defaultPrice = <?php echo $this->itemData["ListPrice"]; ?>*.75;
+	
+		$( "#priceSlider" ).slider({
+			value:defaultPrice,
+			min: 0,
+			max: <?php echo $this->itemData["ListPrice"]; ?>,
+			step: 10,
+			slide: function( event, ui ) {
+				console.log(ui.value);
+				console.log("$"+ui.value);
+				$("#sliderPrice").html( "$" + ui.value );
+			}
+		});
+		$( "#sliderPrice" ).html( "$" + $( "#priceSlider" ).slider( "value" ) );
+
 		$( "#expires").datepicker();
+		
+		$("#addItem").click(function(){
+			$.ajax({
+				url: "/submit/addItem",
+				type: "POST",
+				data: {
+					"userID" : "1",
+					"itemID" : "35",
+					"currentPrice" : "<?php echo $this->itemData["ListPrice"]; ?>",
+					"dealPrice" : $( "#priceSlider" ).slider( "value" ),
+					"expiration" : $("#expires").val()
+					},
+				success: function(msg){
+					alert(msg);
+				}
+		   });
+		});
 	});
 </script>

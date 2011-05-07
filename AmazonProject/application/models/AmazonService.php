@@ -79,8 +79,8 @@ class Default_Model_AmazonService
 		$currentDate = date("Y-m-d");		
 		
 		
-		$writeToDb = false;
-		if($writeToDb == true)
+		$writeToDb = true;
+		if($writeToDb == false)
 		{
 			$data = array(
 					'item_id' => 'NULL' ,

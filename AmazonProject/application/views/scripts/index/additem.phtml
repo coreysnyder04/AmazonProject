@@ -1,7 +1,7 @@
 <div class="wrap">
 	<div class="box_center">
 		<!-- ITEM DESCRIPTION -->
-		<div class="item-Title"><?php echo $this->itemData["Title"]; ?></div>
+		<div class="item-Title"><?php echo $this->itemData["Title"]; ?>!!!!!</div>
 		<div class="item-Manufac">Brand Name</div>
 		<div id="itemInfoContainer">
 			<div id="itemPhotoContainer">
@@ -29,8 +29,8 @@
 			<div class="alertSettingsContainer">
 				<h2>Price: </h2>
 				<label for="anyPriceChange">Any Price Decrease</label><input type="checkbox" id="anyPriceChange"/>
-				<div id="priceSlider" style="width:200px"></div>
-				<h2>Expires:</h2>
+				<div id="priceSlider" style="width:200px"></div><span id="sliderPrice"></span>
+				<h2>Expires:</h2>!!!
 				<p>Date: <input id="expires" type="text"></p>
 			</div>
 		</div>
@@ -42,7 +42,19 @@
 
 <script>
 	$(function() {
-		$( "#priceSlider" ).slider();
+		
+		var defaultPrice = <?php echo $this->itemData["CurrentPrice"]; ?>*.75;
+	
+		$( "#priceSlider" ).slider({
+			value:defaultPrice,
+			min: 0,
+			max: <?php echo $this->itemData["CurrentPrice"]; ?>,
+			step: 50,
+			slide: function( event, ui ) {
+				$("#sliderPrice").val( "$" + ui.value );
+			}
+		});
+		$( "#sliderPrice" ).val( "$" + $( "#slider" ).slider( "value" ) );
 		$( "#expires").datepicker();
 	});
 </script>
