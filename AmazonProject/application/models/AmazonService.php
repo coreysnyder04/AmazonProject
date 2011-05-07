@@ -75,6 +75,12 @@ class Default_Model_AmazonService
 		);
 		
 		
+		//foreach(array_keys($itemData)
+		foreach ($itemData as $key => $eachItemData) 
+		{
+			
+		}
+		
 		//get and format variables for database input
 		$currentDate = date("Y-m-d");		
 		
